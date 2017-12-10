@@ -15,13 +15,7 @@ $(function() {
       socket.emit("receiveResults");
     })
   })
-  .on('receiveData', function(buff) {
-    console.log('send', buff);
-    $('div#outOnPage').html(buff);
-  })
   .on('message', function(buff) {
-    // console.log('message', buff);
-    // $('div#outOnPage').empty();
     $('div#outOnPage').html(buff);
   })
 })
