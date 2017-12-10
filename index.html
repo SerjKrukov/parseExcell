@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="lib/delivery.js"></script>
+    <script src="lib/socket.io.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script> -->
+    <script src="js/app.js"></script>
+    <script src="js/app2.js"></script>
+    <title>XLStoHTML</title>
+</head>
+<body>
+    <header>
+        <h3>Here is test example of file upload</h3>
+    </header>
+    <div>
+      <input type="file" name="fileinputBr" id="fileinputBr" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+      <input type="file" name="fileinput" id="fileinput" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+      <input type="button" value="upload" id="buttonUpload">
+    </div>
+
+
+    <div id="outOnPage">
+
+    </div>
+</body>
+</html>
