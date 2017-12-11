@@ -7,12 +7,12 @@ const socketIO = require('socket.io');
 const path = require('path');
 
 const PORT = process.env.PORT || 5001;
-const INDEX = path.join(__dirname,'../' , 'index.html');
+const INDEX = path.join(__dirname,'./public/' , 'index.html');
 
 const server = express()
+  .use(express.static('public'))
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
 const io = socketIO(server);
 
 
@@ -33,12 +33,12 @@ io.on('connection', function(socket) {
 
   })
   socket.on('receiveResults', () => {
-    let workbook = xlsx.readFile(path.join(__dirname ,'../', fileName))
+    let workbook = xlsx.readFile(path.join(__dirname , fileName))
     workbook.SheetNames.forEach((sheetName) => {
       buff += xlsx.utils.sheet_to_html(workbook.Sheets[sheetName])
     })
     socket.send(buff)
     buff = ''
-    fs.unlinkSync(path.join(__dirname ,'../', fileName))
+    fs.unlinkSync(path.join(__dirname , fileName))
   })
 })
