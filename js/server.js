@@ -1,12 +1,25 @@
 const fs = require('fs')
-const io = require('socket.io').listen(5001)
 const dl = require('delivery')
 const xlsx = require('xlsx');
+
+const express = require('express');
+const socketIO = require('socket.io');
 const path = require('path');
+
+const PORT = process.env.PORT || 5001;
+const INDEX = path.join(__dirname, 'index.html');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const io = socketIO(server);
+
 
 let buff = ''
 let fileName = ''
-io.sockets.on('connection', function(socket) {
+
+io.on('connection', function(socket) {
   let delivery = dl.listen(socket);
   delivery.on('receive.success', function(file) {
     fileName = file.name
