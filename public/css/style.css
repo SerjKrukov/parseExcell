@@ -1,0 +1,8 @@
+.mapping {
+    color: blue;
+    text-decoration: underline;
+}
+.mapping:hover {
+    color: brown;
+    cursor: pointer;
+}
