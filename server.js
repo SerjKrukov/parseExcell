@@ -9,9 +9,13 @@ const express = require('express');
 const path = require('path');
 const mongodb = require('mongodb');
 
-const urlDB = 'mongodb://localhost:27017';
+// const urlDB = 'mongodb://localhost:27017/testdb';
+const urlPath = process.env.MONGOLAB_URI;
 const PORT = process.env.PORT || 5001;
 const INDEX = path.join(__dirname,'./public/' , 'index.html');
+
+console.log(urlPath.slice(urlPath.lastIndexOf("/") + 1));
+let urlDB = urlPath.slice(urlPath.lastIndexOf("/") + 1);
 
 const server = express()
 server.use(bodyParser.json())
@@ -24,13 +28,13 @@ server.use(express.static('public'))
   server.get("/", (req, res) => {
     res.sendFile(INDEX);
   })
-mongodb.MongoClient.connect(urlDB, (error, client) => {
+mongodb.MongoClient.connect(urlPath, (error, client) => {
   server.post("/newItems/:table", (req, res, next) => {
     let table = req.params.table;
     let items = req.body;
     // console.log(table);
     // console.log(items);
-    db = client.db("testdb");
+    db = client.db(urlDB);
     db.collection(table).insert(items, (error, results) => {
       if (error) console.error(error)
       console.log(`successfully save data to ${table} collection`);
@@ -47,7 +51,7 @@ mongodb.MongoClient.connect(urlDB, (error, client) => {
 
   server.get("/newItems/:table", (req, res, next) => {
     let table = req.params.table;
-    db = client.db("testdb");
+    db = client.db(urlDB);
     db.collection(table).find({},{sort: {_id: 1}})
       .toArray((error, newItems) => {
         if (error) return next(error);
