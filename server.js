@@ -31,8 +31,8 @@ server.use(express.static('public'))
   })
 mongodb.MongoClient.connect(urlPath, (error, client) => {
   console.log('we are at connection side');
-  console.log(urlPath);
-  console.log(urlDB);
+  console.log('urlPath ' + urlPath);
+  console.log('urlDB ' + urlDB);
   server.post("/newItems/:table", (req, res, next) => {
     let table = req.params.table;
     let items = req.body;
