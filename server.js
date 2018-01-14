@@ -14,7 +14,7 @@ const urlPath = process.env.MONGOLAB_URI;
 const PORT = process.env.PORT || 5001;
 const INDEX = path.join(__dirname,'./public/' , 'index.html');
 
-console.log(urlPath.slice(urlPath.lastIndexOf("/") + 1));
+// console.log(urlPath.slice(urlPath.lastIndexOf("/") + 1));
 let urlDB = urlPath.slice(urlPath.lastIndexOf("/") + 1);
 
 const server = express()
