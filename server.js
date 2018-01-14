@@ -16,6 +16,7 @@ const INDEX = path.join(__dirname,'./public/' , 'index.html');
 
 // console.log(urlPath.slice(urlPath.lastIndexOf("/") + 1));
 let urlDB = urlPath.slice(urlPath.lastIndexOf("/") + 1);
+let db;
 
 const server = express()
 server.use(bodyParser.json())
@@ -42,12 +43,13 @@ mongodb.MongoClient.connect(urlPath, (error, client) => {
     })
     // client.close();
     var response = {
-      status  : 200,
+      // status  : 200,
       success : table
   }
     // res.status(200);
     // res.send(table);
-    res.send(JSON.stringify(response));
+    res.status(200).send(JSON.stringify(response));
+    // res.send(JSON.stringify(response));
   })
 
   server.get("/newItems/:table", (req, res, next) => {
