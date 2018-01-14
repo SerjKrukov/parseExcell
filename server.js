@@ -29,6 +29,7 @@ server.use(express.static('public'))
     res.sendFile(INDEX);
   })
 mongodb.MongoClient.connect(urlPath, (error, client) => {
+  console.log('we are at connection side');
   server.post("/newItems/:table", (req, res, next) => {
     let table = req.params.table;
     let items = req.body;
